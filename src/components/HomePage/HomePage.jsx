@@ -1,3 +1,4 @@
+// HomePage.jsx
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import "./HomePage.css";
 import logo from "../../assets/logo.png"; // header + centered hero logo
@@ -91,7 +92,7 @@ const HomePage = () => {
         </div>
       </header>
 
-      {/* HERO (unchanged) */}
+      {/* HERO (unchanged except responsive stack via CSS) */}
       <section id="section-1">
         <div className="content-slider">
           <input type="radio" id="banner1" className="sec-1-input" name="banner" checked={active === 0} onChange={() => setActive(0)} />

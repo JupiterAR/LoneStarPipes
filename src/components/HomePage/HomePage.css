@@ -50,7 +50,7 @@
   a  { text-decoration: none; }
   
   /* ---------------------------------
-     HEADER (as before)
+     HEADER
      --------------------------------- */
   .main-header {
     position: absolute;
@@ -118,7 +118,7 @@
   }
   
   /* ---------------------------------
-     HERO / SLIDER (as before)
+     HERO / SLIDER
      --------------------------------- */
   #section-1 {
     position: relative;
@@ -404,21 +404,140 @@
     border-top: 1px solid #efefef; color: #666; text-align: center;
   }
   
-  /* Mobile refinements */
+  /* ---------------------------------
+     MOBILE + SMALL FORM-FACTOR TWEAKS
+     Stack CTAs above/below logo on small screens
+     --------------------------------- */
+  
+  /* Hide the floating menu on very small screens */
   @media (max-width: 480px) {
     .main-header .header-wrapper .main-menu { display: none !important; }
-    html, body { scroll-snap-type: none !important; }
+  }
+  
+  /* Stack the hero to vertical for small widths (phones) */
+  @media (max-width: 640px) {
     #section-1 .content-slider .slider .banner .banner-inner-wrapper {
-      padding-top: 80px !important; padding-bottom: 5.5em !important;
+      padding-top: 88px !important;      /* leave room for sticky header */
+      padding-bottom: 84px !important;   /* leave room for controls */
     }
-    .hero-row { transform: none; gap: 1rem; width: 92%; }
-    .hero-logo img { width: min(48vmin, 260px); }
-    .hero-block { min-height: 150px; gap: .6em; }
-    .learn-more-cta { padding: .65em 1.2em; font-size: .85em; }
-    .page-section .container { padding-block: 1.2rem; }
+  
+    .hero-row {
+      flex-direction: column;            /* stack vertically */
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      transform: none;                   /* remove upward shift so it centers */
+      width: min(94%, 820px);
+    }
+  
+    .hero-left,
+    .hero-right {
+      width: 100%;
+      min-width: 0;
+      max-width: 520px;                  /* keep buttons away from edges */
+    }
+  
+    .hero-block {
+      padding-inline: 12px;              /* comfy side gutters */
+      min-height: auto;
+      gap: 0.65em;
+    }
+  
+    .hero-logo img {
+      width: min(58vmin, 320px);         /* slightly smaller center logo */
+      height: auto;
+    }
+  
+    .hero-note {
+      font-size: clamp(1rem, 2.4vw, 1.25rem);
+    }
+  
+    .learn-more-cta {
+      width: 100%;
+      max-width: 18rem;                  /* nice pill width */
+      padding: 0.75em 1.2em;
+      box-sizing: border-box;
+      border-radius: 999px;
+    }
+  
+    #section-1 .content-slider nav {
+      bottom: 0.4em;
+    }
+  }
+  
+  /* Also stack when the screen is short (e.g., small phones in landscape) */
+  @media (max-height: 720px) and (orientation: landscape) {
+    .hero-row {
+      flex-direction: column;
+      gap: 0.6rem;
+      transform: none;
+    }
+    .hero-logo img { width: min(46vmin, 280px); }
   }
   
   /* Snap scrolling */
   html, body { scroll-snap-type: y proximity; }
   #section-1, .page-section { scroll-snap-align: start; }
+
+  
+  
+/* =========================================================
+   LESS WIDE THAN A LAPTOP (≤1280px)
+   - Stack CTAs above/below the logo (never side-by-side)
+   - Hide header nav
+   - Keep 4 tabs horizontal but push them lower
+   ========================================================= */
+   @media (max-width: 1080px) {
+    /* Remove the top-right nav entirely */
+    .main-header .header-wrapper .main-menu { display: none !important; }
+  
+    /* Force hero to vertical so CTAs are above/below the logo */
+    .hero-row {
+      flex-direction: column !important;
+      align-items: center;
+      justify-content: center;
+      gap: 0.9rem;
+      transform: none !important;
+      width: min(94%, 1000px);
+    }
+    .hero-left, .hero-right {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 640px;
+    }
+    .hero-block { padding-inline: 14px; min-height: auto; gap: .7em; }
+    .hero-logo img { width: min(56vmin, 520px); height: auto; }
+  
+    /* Reserve space for the tabs using a variable we can increase at smaller widths */
+    :root { --tabs-gap: 220px; }
+  
+    /* Lower top content a bit and add a big cushion above the tabs */
+    #section-1 .content-slider .slider .banner .banner-inner-wrapper {
+      padding-top: calc(env(safe-area-inset-top) + 120px) !important;
+      padding-bottom: var(--tabs-gap) !important;
+    }
+  
+    /* Keep the tab bar pinned near the bottom edge (still horizontal) */
+    #section-1 .content-slider nav {
+      bottom: calc(env(safe-area-inset-bottom) + 6px) !important;
+    }
+    #section-1 .content-slider nav .controls {
+      width: 86%;
+      margin: 0 auto;
+    }
+    #section-1 .content-slider nav .controls label {
+      height: 2.5em;            /* compact row height */
+      margin: 0 0.55em;         /* keep 4 labels side-by-side */
+    }
+  }
+  
+  /* As the screen gets narrower, push the tabs even lower (more cushion). */
+  @media (max-width: 1024px) { :root { --tabs-gap: 240px; } }
+  @media (max-width: 900px)  { :root { --tabs-gap: 260px; } }
+  @media (max-width: 768px)  { :root { --tabs-gap: 280px; } }
+  @media (max-width: 640px)  { 
+    :root { --tabs-gap: 300px; }
+    /* tiny nudge closer to the bottom edge on phones */
+    #section-1 .content-slider nav { bottom: calc(env(safe-area-inset-bottom) + 4px) !important; }
+  }
   
