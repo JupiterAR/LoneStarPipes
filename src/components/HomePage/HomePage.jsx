@@ -409,7 +409,7 @@ const HomePage = () => {
 
       <footer id="main-footer" className="footer">
         <div className="container">
-          <p>© {new Date().getFullYear()} Your Company. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Lone Star Pipes. All rights reserved.</p>
         </div>
       </footer>
     </div>
