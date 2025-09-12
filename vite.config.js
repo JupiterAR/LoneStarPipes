@@ -3,7 +3,6 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
+  base: '/',            // ✅ root domain
   plugins: [react()],
-  // IMPORTANT for project sites on GitHub Pages:
-  base: '/LoneStarPipes/', // <- must match your repo name
 })
