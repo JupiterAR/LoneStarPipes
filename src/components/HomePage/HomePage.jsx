@@ -11,7 +11,7 @@ const IDS = {
 };
 
 const LINKS = {
-  meeting: "https:forms.lonestarpipes.services", // kept on hero only
+  meeting: "https://forms.lonestarpipes.services", // kept on hero only
 };
 
 const HomePage = () => {
